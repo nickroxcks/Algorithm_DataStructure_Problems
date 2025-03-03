@@ -1,32 +1,37 @@
+/*
+Single pass scan, using stack as memory
+
+O(N) time for scanning each character 1 at a time
+O(N) memory for worst case if the stack is the size of the entire problem
+*/
+
 /**
  * @param {string} s
  * @return {boolean}
  */
 var isValid = function(s) {
+    let stack = [];
     let dict = {
-        '{' : '}',
-        '[' : ']',
-        '(': ')'
-    }
-    let stack = []
-    stack.push(s.at(0));
-    
-    for(let i = 1; i< s.length; i++){
-        let curBracket = s.at(i);
-        if ((curBracket === '{') || (curBracket === '(') || (curBracket === '[')){
-            stack.push(curBracket);
+        ']' : '[',
+        '}' : '{',
+        ')' : '('
+    };
+
+    for(let i = 0; i < s.length; i++){
+        let curr_bracket = s[i];
+        if((curr_bracket == '[') || (curr_bracket == '{') || (curr_bracket == '(')){
+            stack.push(s[i]);
         }
         else{
-            let poppedBracket = stack.pop();
-            if (dict[poppedBracket] != curBracket){
-                return false
+            if(stack.pop() != dict[curr_bracket]){
+                return false;
             }
         }
     }
-    if(stack.length === 0){
-        return true;
+    if(stack.length > 0){
+        return false;
     }
     else{
-        return false;
+        return true;
     }
 };
