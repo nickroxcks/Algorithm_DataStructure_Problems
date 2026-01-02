@@ -10,20 +10,19 @@ class ListNode:
 
 ''''
 My solution
-Using hashtable to store memory addresses of each node
+Using hashtable to store nodes (this will work because we are storing hash value + reference to that exact object)
 O(n) time
 O(n) memory
 '''
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        dic = {}
-        currNode = head
-        while (currNode):
-            if id(currNode) in dic:
+        dic = set()
+        while head:
+            if head in dic:
                 return True
             else:
-                dic[id(currNode)] = 1
-                currNode = currNode.next
+                dic.add(head)
+                head = head.next
         return False
 
 ''''
