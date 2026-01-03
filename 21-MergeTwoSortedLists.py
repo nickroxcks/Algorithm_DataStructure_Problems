@@ -2,22 +2,18 @@
 My solution: Parallel iterative approach using 2 pointers and no additional memory
 O(N+M) time
 O(1) memory
-
-
 '''
-
-
-# Definition for singly-linked list.
 from typing import Optional
 
-
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # Get the basic edge cases out of the way
+
+        # Get the empty list edge cases out of the way to return answer immediately
         if (list1 is None and list2 is not None):
             return list2
         elif (list1 is not None and list2 is None):
@@ -27,7 +23,7 @@ class Solution:
 
         head = ListNode()
         curr = head
-        while (list1 is not None or list2 is not None):
+        while (list1 or list2):
             if (list1 and list2 and list1.val <= list2.val):
                 curr.next = list1
                 curr = curr.next
