@@ -37,3 +37,18 @@ class Solution:
             else:
                 left = nums[left]
                 slow = nums[slow]
+
+
+'''
+Brute Force Solution (too slow)
+O(n^2) time
+O(1) memory
+'''
+class Solution2:
+    def findDuplicate(self, nums: List[int]) -> int:
+        for indexi, i in enumerate(nums):
+            indexj = indexi
+            for j in nums[indexi:]:
+                if j == i and indexi != indexj:
+                    return j
+                indexj+=1
